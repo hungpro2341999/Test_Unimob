@@ -44,17 +44,11 @@ public class SystemActionStore : SingletonX<SystemActionStore>
         {
             var client = GetClientReady();
             System.Action action = null;
-            if (client == null)
-            {
-                AddToWait(evt.employer);
-                return;
-            }
             action = () =>
             {
                 client = GetClientReady();
                 if (client != null)
                 {
-                    RemoveWait(evt.employer);
                     EmployerGiveToClient(evt.employer, client);
                     actionWait -= action;
                 }
@@ -70,15 +64,6 @@ public class SystemActionStore : SingletonX<SystemActionStore>
         });       
     }
 
-    public void AddToWait(Employer employer)
-    {
-        listEmployerWait.Add(employer);
-      
-    }
-    void RemoveWait(Employer employer)
-    {
-        listEmployerWait.Remove(employer);
-    }
     void EmployerTakeRsFromTree(Employer employer, Tree tree)
     {
         employer.moneyClaim = tree.profit.Value;

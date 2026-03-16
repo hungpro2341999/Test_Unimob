@@ -10,6 +10,7 @@ public class GameController : SingletonX<GameController>
    void Start()
    {
 
+      Application.targetFrameRate = 60;
       EventBus.Subscribe<EventTreeFull>((cmd) =>
       {
          Debug.Log("CommandTreeFull received");
